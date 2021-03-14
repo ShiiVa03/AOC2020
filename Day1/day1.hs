@@ -9,18 +9,6 @@ import Data.Set hiding (map)
 main :: IO()
 main = do
         f <- readFile "input"
-        let resultado = comparing $ func1 $ lines f
+        let inputs = map read $ lines f
+            resultado = head [x*y | x <- inputs , y <- inputs, x + y ==2020]
         print (show resultado)
-
-func1 :: [String] -> [Int]
-func1  =  map read
-
-sum' :: Int -> [Int]-> Int 
-sum' _ [] = 0
-sum' n (x:xs) | (n + x) == 2020 = n * x
-              | otherwise  = sum' n xs
-
-comparing :: [Int] -> Int 
-comparing [] = 0
-comparing (x:xs) | sum' x xs == 0  = comparing xs
-                 | otherwise  = sum' x xs
